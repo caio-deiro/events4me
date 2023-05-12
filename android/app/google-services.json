@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "442619974988",
+    "project_id": "events4me-563e3",
+    "storage_bucket": "events4me-563e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442619974988:android:188abce9d764a9ffaa6be9",
+        "android_client_info": {
+          "package_name": "com.events4me.events4me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442619974988-ehdb3p8lphoved54mt370gs3it14j7oe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqbRM8h95NUKe8hvPB1ND0Aic0PZrMkcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442619974988-ehdb3p8lphoved54mt370gs3it14j7oe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

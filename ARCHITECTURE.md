@@ -23,10 +23,8 @@
 
 # Principais packages
 
-- Getx: para gerencia de estado e validação de campos.
-- Modular: Para controle de rotas e injeção de dependencia.
+- Getx: para gerencia de estado, validação de campos, injeção de dependencia e guardar dados        localmente.
 - Dio: Para fazer requests externas e consumo de API.
-- Shared Preferences: Para guardar dados localmente.
 - Security storage: Para guardar dados sensiveis localmente. 
 
 
