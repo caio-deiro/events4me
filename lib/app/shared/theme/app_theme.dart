@@ -18,13 +18,13 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.white,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        disabledBackgroundColor: AppColors.grey2,
-        backgroundColor: AppColors.dark,
-        textStyle: TextStyle(color: AppColors.white, fontSize: 10),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6),
-        ),
-      ),
+          disabledBackgroundColor: AppColors.grey2,
+          backgroundColor: AppColors.dark,
+          textStyle: TextStyle(color: AppColors.white, fontSize: 10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+          ),
+          minimumSize: Size(200, 40)),
     ),
     inputDecorationTheme: InputDecorationTheme(
       prefixIconColor: AppColors.dark,
@@ -36,10 +36,14 @@ class AppTheme {
           borderSide: BorderSide(color: AppColors.red)),
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.green)),
+          borderSide: BorderSide(color: AppColors.dark)),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: AppColors.dark),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: AppColors.green),
       ),
       fillColor: AppColors.dark,
     ),
