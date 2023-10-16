@@ -1,6 +1,9 @@
 # Histórico de mudanças do projeto
 
 
+# [1.0.4+4] 16/10/2023
+- Redefinição do uso de alguns packages e pastas
+
 # [1.0.3+3] 06/06/2023
 - Criação dos componentes de layout
 
