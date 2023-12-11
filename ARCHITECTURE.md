@@ -18,7 +18,6 @@
 - Repository Pattern: para organização e consumo de dados externos.
 - Service Pattern: para isolar trechos de código com outras responsabilidades.
 - Dependency Injection: para resolver dependencias das classes.
-- Adapter: Converter um objeto em outro.
 - Flutter Modular: para organizar os modulos e bindings da aplicação.
 
 

@@ -1,6 +1,17 @@
 # Histórico de mudanças do projeto
 
 
+# [1.0.5+5] 12/11/2023
+- Criação de todos os modulos
+- Criação das logicas da camada controller
+- Criação das logicas da camada repository
+- Testes das camadas de controller repository
+- Criação do dio service
+- Criação do Flutter secure storage service
+- Criação do user service
+- Suporte do projeto ao firebase com versão IOS e Android
+- Criação de metodos na classe TOOLS  
+
 # [1.0.4+4] 16/10/2023
 - Redefinição do uso de alguns packages e pastas
 
