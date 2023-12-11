@@ -3,10 +3,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashModule extends Module {
   @override
-  List<Bind> get binds => [];
+  void binds(i) {}
 
   @override
-  List<ModularRoute> get routes => [
-        ChildRoute('/', child: (context, args) => SplashPage()),
-      ];
+  void routes(r) {
+    r.child('/', child: (context) => SplashPage());
+  }
 }

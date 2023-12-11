@@ -1,8 +1,6 @@
-import 'package:events4me/app/modules/splash/splash_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class SplashPage extends GetView<SplashController> {
+class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
