@@ -17,9 +17,6 @@ void main() {
   late UserService userService;
   late GoogleSignIn googleSignIn;
 
-  var token =
-      'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwMDc1ODY5MCwiaWF0IjoxNzAwNzU4NjkwfQ.MjGEvqoNFR4O0p5QE6KmcoyjHxW3-ZtFxrvTIulkE54';
-
   setUpAll(() {
     setupAppModuleToTests();
   });
@@ -50,7 +47,7 @@ void main() {
                   'phone': '123',
                 },
               ));
-      userService.token = token;
+      userService.token = null;
 
       userService.user = UserModel(
         id: 1,
