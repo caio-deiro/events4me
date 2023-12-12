@@ -1,7 +1,11 @@
 # Histórico de mudanças do projeto
 
+# [1.0.6+6] 12/12/2023
+- Criação dos arquivos de rota das paginas do app
+- Criação dos arquivos de rota dos modulos do app
+- Organização dos modulos do app
 
-# [1.0.5+5] 12/11/2023
+# [1.0.5+5] 11/12/2023
 - Criação de todos os modulos
 - Criação das logicas da camada controller
 - Criação das logicas da camada repository

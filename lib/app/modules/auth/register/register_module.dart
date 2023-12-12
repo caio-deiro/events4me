@@ -2,6 +2,7 @@ import 'package:events4me/app/modules/auth/register/controller/register_controll
 import 'package:events4me/app/modules/auth/register/UI/register_page.dart';
 import 'package:events4me/app/modules/auth/register/repositories/register_repository_impl.dart';
 import 'package:events4me/app/modules/auth/register/states/register_states.dart';
+import 'package:events4me/app/shared/constants/app_routes.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RegisterModule extends Module {
@@ -17,6 +18,6 @@ class RegisterModule extends Module {
 
   @override
   void routes(r) => [
-        r.child('/register', child: (context) => RegisterPage()),
+        r.child(AppRoutes.registerPage, child: (context) => RegisterPage()),
       ];
 }

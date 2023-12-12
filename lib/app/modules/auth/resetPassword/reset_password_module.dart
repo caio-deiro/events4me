@@ -2,6 +2,7 @@ import 'package:events4me/app/modules/auth/resetPassword/repositories/reset_pass
 import 'package:events4me/app/modules/auth/resetPassword/controller/reset_password_controller.dart';
 import 'package:events4me/app/modules/auth/resetPassword/UI/reset_password_page.dart';
 import 'package:events4me/app/modules/auth/resetPassword/states/reset_password_states.dart';
+import 'package:events4me/app/shared/constants/app_routes.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ResetPasswordModule extends Module {
@@ -17,6 +18,7 @@ class ResetPasswordModule extends Module {
 
   @override
   void routes(r) => [
-        r.child('/register', child: (context) => ResetPasswordPage()),
+        r.child(AppRoutes.resetPasswordPage,
+            child: (context) => ResetPasswordPage()),
       ];
 }
