@@ -1,22 +1,17 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:events4me/l10n/locale_keys.g.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:validatorless/validatorless.dart';
 
 class Tools {
-  Tools._();
-  static final Tools instance = Tools._();
-
   Future<String?> get getImagePath async {
     final picker = ImagePicker();
     final XFile? imagem = await picker.pickImage(source: ImageSource.gallery);
 
     String? pathImage = imagem?.path;
     return pathImage;
-  }
-
-  Future<FormData> createFormData({required FormData formData}) async {
-    return formData;
   }
 
   bool isTokenExpired({required String token}) {
@@ -76,19 +71,46 @@ class Tools {
   String getErrorFromFirebaseAuth(String error) {
     switch (error) {
       case "ERROR_INVALID_EMAIL":
-        return "Your email address appears to be malformed.";
+        return LocaleKeys.errorInvalidEmail.tr();
       case "ERROR_WRONG_PASSWORD":
-        return "Your password is wrong.";
+        return LocaleKeys.errorWrongPassword.tr();
       case "ERROR_USER_NOT_FOUND":
-        return "User with this email doesn't exist.";
+        return LocaleKeys.errorUserNotFound.tr();
       case "ERROR_USER_DISABLED":
-        return "User with this email has been disabled.";
+        return LocaleKeys.errorUserDisabled.tr();
       case "ERROR_TOO_MANY_REQUESTS":
-        return "Too many requests. Try again later.";
+        return LocaleKeys.errorTooManyRequests.tr();
       case "ERROR_OPERATION_NOT_ALLOWED":
-        return "Signing in with Email and Password is not enabled.";
+        return LocaleKeys.errorOperationNotAllowed.tr();
       default:
-        return "An undefined Error happened.";
+        return LocaleKeys.errorDefault.tr();
     }
+  }
+
+  /// Validators
+  ///
+  String? Function(String?) emailValidator() {
+    return Validatorless.multiple([
+      Validatorless.email(LocaleKeys.errorInvalidEmail.tr()),
+      requiredValidator(LocaleKeys.requiredField.tr()),
+    ]);
+  }
+
+  String? Function(String?) phoneValidator() {
+    return Validatorless.multiple([
+      Validatorless.number(LocaleKeys.incorrectNumber.tr()),
+      requiredValidator(LocaleKeys.requiredField.tr()),
+    ]);
+  }
+
+  String? Function(String?) passwordValidator() {
+    return Validatorless.multiple([
+      Validatorless.min(8, LocaleKeys.passwordMinLenght.tr()),
+      requiredValidator(LocaleKeys.requiredField.tr()),
+    ]);
+  }
+
+  String? Function(dynamic) requiredValidator(String message) {
+    return Validatorless.required(message);
   }
 }

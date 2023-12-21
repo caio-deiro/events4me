@@ -27,6 +27,7 @@ class UserService {
   Future<void> userLogout() async {
     final userIsLoggedWithGoogle = await googleSignIn.isSignedIn();
     if (userIsLoggedWithGoogle) {
+      await FirebaseAuth.instance.signOut();
       await googleSignIn.signOut();
       Modular.to.pushReplacementNamed('/login');
     } else {

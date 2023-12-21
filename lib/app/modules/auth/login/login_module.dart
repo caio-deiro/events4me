@@ -5,7 +5,6 @@ import 'package:events4me/app/modules/auth/login/states/login_state.dart';
 import 'package:events4me/app/modules/auth/register/register_module.dart';
 import 'package:events4me/app/modules/auth/resetPassword/reset_password_module.dart';
 import 'package:events4me/app/shared/constants/app_modules.dart';
-import 'package:events4me/app/shared/constants/app_routes.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginModule extends Module {
@@ -21,7 +20,7 @@ class LoginModule extends Module {
 
   @override
   void routes(r) {
-    r.child(AppRoutes.loginPage, child: (context) => LoginPage());
+    r.child('/', child: (context) => LoginPage());
     r.module(AppModules.registerModule, module: RegisterModule());
     r.module(AppModules.resetPasswordModule, module: ResetPasswordModule());
   }

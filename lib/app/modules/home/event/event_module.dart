@@ -22,7 +22,7 @@ class EventModule extends Module {
 
   @override
   void routes(r) => [
-        r.child(AppRoutes.homePage, child: (context) => HomeEventsPage()),
+        r.child('/', child: (context) => HomeEventsPage()),
         r.child(AppRoutes.createEventPage,
             child: (context) => CreateEventPage()),
         r.child(AppRoutes.eventsCalendarPage,

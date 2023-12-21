@@ -26,6 +26,8 @@ class LoginRepositoryImpl implements LoginRepository {
 
   var userService = Modular.get<UserService>();
 
+  var appTools = Modular.get<Tools>();
+
   /// Login with API
   @override
   Future<LoginState> login({String? email, String? password}) async {
@@ -66,7 +68,7 @@ class LoginRepositoryImpl implements LoginRepository {
       userService.googleUser = userCredential;
       return state.copyWith(status: LoginStatus.success);
     } on FirebaseAuthException catch (e) {
-      final errorMessage = Tools.instance.getErrorFromFirebaseAuth(e.code);
+      final errorMessage = appTools.getErrorFromFirebaseAuth(e.code);
       return state.copyWith(status: LoginStatus.error, error: errorMessage);
     }
   }

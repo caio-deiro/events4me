@@ -11,6 +11,7 @@ class CustomDioInterceptor extends Interceptor {
   CustomDioInterceptor(this.dio);
 
   var userService = Modular.get<UserService>();
+  var appTools = Modular.get<Tools>();
 
   @override
   void onRequest(
@@ -19,7 +20,7 @@ class CustomDioInterceptor extends Interceptor {
     // Então vamos precisar validar se o token está expirado
     if (userService.token != null) {
       // Chamamos a função que retorna um bool se o token está válido ou não
-      if (Tools.instance.isTokenExpired(token: userService.token!)) {
+      if (appTools.isTokenExpired(token: userService.token!)) {
         // Com o token inválido, chamamos uma função que pede a API um novo token
         final newtoken = await userService.refreshUserToken();
 
