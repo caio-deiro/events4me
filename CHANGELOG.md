@@ -1,5 +1,11 @@
 # Histórico de mudanças do projeto
 
+# [1.0.7+7] 21/12/2023
+- Criação dos arquivos de internacionalização do app
+- Ajustes no nome das rotas padrões do modulo para '/'
+- Ajustes na função logout do firebase no userService
+
+
 # [1.0.6+6] 12/12/2023
 - Criação dos arquivos de rota das paginas do app
 - Criação dos arquivos de rota dos modulos do app
