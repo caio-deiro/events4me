@@ -10,10 +10,13 @@ import 'package:easy_localization/easy_localization.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(EasyLocalization(
-      supportedLocales: L10nService.locales,
-      path: 'assets/l10n',
-      fallbackLocale: L10nService.locales[1],
-      child: ModularApp(module: AppModule(), child: const AppWidget())));
+
+  return runApp(EasyLocalization(
+    supportedLocales: L10nService.locales,
+    path: 'assets/l10n',
+    fallbackLocale: L10nService.locales[1],
+    child: ModularApp(module: AppModule(), child: AppWidget()),
+  ));
 }

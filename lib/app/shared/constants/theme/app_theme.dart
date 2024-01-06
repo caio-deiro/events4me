@@ -2,7 +2,7 @@ import 'package:events4me/app/shared/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  ThemeData themeData = ThemeData(
+  static final ThemeData themeData = ThemeData(
     checkboxTheme:
         CheckboxThemeData(fillColor: MaterialStateColor.resolveWith((states) {
       if (states.contains(MaterialState.error)) {
@@ -10,7 +10,7 @@ class AppTheme {
       } else if (states.contains(MaterialState.selected)) {
         return AppColors.green;
       } else {
-        return AppColors.dark;
+        return AppColors.white;
       }
     })),
     primaryColor: AppColors.white,
@@ -28,6 +28,7 @@ class AppTheme {
     ),
     inputDecorationTheme: InputDecorationTheme(
       prefixIconColor: AppColors.dark,
+      labelStyle: TextStyle(color: AppColors.grey4),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
       ),

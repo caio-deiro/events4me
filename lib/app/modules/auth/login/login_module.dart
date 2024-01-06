@@ -10,9 +10,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 class LoginModule extends Module {
   @override
   void binds(i) {
-    i.addLazySingleton((i) => LoginState.new);
-    i.addLazySingleton((i) => LoginRepositoryImpl.new);
-    i.addLazySingleton<LoginController>((i) => LoginController.new,
+    i.addLazySingleton<LoginState>(LoginState.new);
+    i.addLazySingleton(LoginRepositoryImpl.new);
+    i.addLazySingleton<LoginController>(LoginController.new,
         config: BindConfig(
           onDispose: (bloc) => bloc.close(),
         ));
@@ -20,7 +20,10 @@ class LoginModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (context) => LoginPage());
+    r.child('/',
+        child: (context) => LoginPage(
+              loginController: Modular.get<LoginController>(),
+            ));
     r.module(AppModules.registerModule, module: RegisterModule());
     r.module(AppModules.resetPasswordModule, module: ResetPasswordModule());
   }

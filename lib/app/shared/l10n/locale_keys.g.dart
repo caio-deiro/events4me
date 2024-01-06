@@ -29,6 +29,11 @@ abstract class  LocaleKeys {
   static const errorUserNotFound = 'errorUserNotFound';
   static const errorUserDisabled = 'errorUserDisabled';
   static const errorOperationNotAllowed = 'errorOperationNotAllowed';
+  static const errorTooManyRequests = 'errorTooManyRequests';
   static const errorDefault = 'errorDefault';
+  static const requiredField = 'requiredField';
+  static const passwordMinLenght = 'passwordMinLenght';
+  static const incorrectEmail = 'incorrectEmail';
+  static const incorrectNumber = 'incorrectNumber';
 
 }

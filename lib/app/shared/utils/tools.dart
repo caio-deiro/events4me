@@ -1,11 +1,15 @@
 import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:events4me/l10n/locale_keys.g.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:validatorless/validatorless.dart';
 
+import '../l10n/locale_keys.g.dart';
+
 class Tools {
+  static late Size size;
+
   Future<String?> get getImagePath async {
     final picker = ImagePicker();
     final XFile? imagem = await picker.pickImage(source: ImageSource.gallery);
@@ -66,6 +70,10 @@ class Tools {
     // Após garantir que ele tem o tamanho certo, fazemos o decode e retornamos
     // Uma string
     return utf8.decode(base64Url.decode(output));
+  }
+
+  Size getSizeOfScreen(BuildContext context) {
+    return size = MediaQuery.of(context).size;
   }
 
   String getErrorFromFirebaseAuth(String error) {
