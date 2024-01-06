@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:events4me/app/modules/auth/login/repositories/login_repository.dart';
+import 'package:events4me/app/modules/auth/login/repositories/login_repository_impl.dart';
 import 'package:events4me/app/modules/auth/login/states/login_state.dart';
 
 class LoginController extends Cubit<LoginState> {
-  final LoginRepository repository;
+  final LoginRepositoryImpl repository;
+
   LoginController({
     required this.repository,
   }) : super(LoginState());

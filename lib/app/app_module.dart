@@ -15,12 +15,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AppModule extends Module {
   @override
   void binds(i) {
-    i.addLazySingleton<DioService>(DioService.new);
+    i.addInstance<DioService>(DioService());
+    i.addLazySingleton<UserService>(UserService.new);
     i.addLazySingleton<GoogleSignIn>(GoogleSignIn.new);
     i.addLazySingleton<FlutterSecureStorage>(FlutterSecureStorage.new);
     i.addLazySingleton<SecureStorageService>(SecureStorageService.new);
-    i.addLazySingleton(UserService.new);
-    i.addLazySingleton(Tools.new);
+    i.addLazySingleton<Tools>(Tools.new);
   }
 
   @override

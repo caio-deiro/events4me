@@ -19,7 +19,7 @@
     "pending": "Pending",
     "youCurrentlyHaveNoEvents": "You currently have no events at this time",
     "old": "Old",
-    "new": "New",
+    "young": "New",
     "createEvent": "Create Event",
     "guests": "Guests",
     "errorInvalidEmail": "Your email address appears to be malformed.",

@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:events4me/app/modules/auth/login/controller/login_controller.dart';
-import 'package:events4me/app/modules/auth/login/repositories/login_repository.dart';
 import 'package:events4me/app/modules/auth/login/repositories/login_repository_impl.dart';
 import 'package:events4me/app/modules/auth/login/states/login_state.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +12,7 @@ class MockGoogleLogin extends Mock implements GoogleSignIn {}
 
 void main() {
   late LoginController controller;
-  late LoginRepository repository;
+  late LoginRepositoryImpl repository;
   late LoginState state;
 
   setUp(() {

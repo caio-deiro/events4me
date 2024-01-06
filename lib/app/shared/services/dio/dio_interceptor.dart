@@ -10,12 +10,11 @@ class CustomDioInterceptor extends Interceptor {
   final DioService dio;
   CustomDioInterceptor(this.dio);
 
-  var userService = Modular.get<UserService>();
-  var appTools = Modular.get<Tools>();
-
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
+    var userService = Modular.get<UserService>();
+    var appTools = Modular.get<Tools>();
     // Se o token não estiver nulo, significa que o usuário fez o login
     // Então vamos precisar validar se o token está expirado
     if (userService.token != null) {

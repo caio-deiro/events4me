@@ -6,7 +6,10 @@ class DioService extends DioForNative {
   static const baseUrl = '';
 
   DioService()
-      : super(BaseOptions(baseUrl: baseUrl, contentType: 'application/json')) {
+      : super(BaseOptions(
+          baseUrl: baseUrl,
+          contentType: 'application/json',
+        )) {
     super.interceptors.add(CustomDioInterceptor(this));
   }
 }
