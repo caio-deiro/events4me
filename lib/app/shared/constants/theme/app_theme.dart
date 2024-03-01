@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static final ThemeData themeData = ThemeData(
-    checkboxTheme:
-        CheckboxThemeData(fillColor: MaterialStateColor.resolveWith((states) {
+    checkboxTheme: CheckboxThemeData(fillColor: MaterialStateColor.resolveWith((states) {
       if (states.contains(MaterialState.error)) {
         return AppColors.dark;
       } else if (states.contains(MaterialState.selected)) {
@@ -32,12 +31,10 @@ class AppTheme {
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.red)),
-      enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.dark)),
+      errorBorder:
+          OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.red)),
+      enabledBorder:
+          OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.dark)),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: AppColors.dark),
@@ -48,6 +45,10 @@ class AppTheme {
       ),
       fillColor: AppColors.dark,
     ),
-    textTheme: TextTheme(),
+    textTheme: TextTheme(
+      bodyMedium: TextStyle(fontSize: 15, color: AppColors.white),
+      bodySmall: TextStyle(fontSize: 14, color: AppColors.white),
+      bodyLarge: TextStyle(fontSize: 22, color: AppColors.white),
+    ),
   );
 }

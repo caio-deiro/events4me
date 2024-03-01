@@ -6,6 +6,7 @@ import 'package:events4me/app/shared/services/secure_storage/secure_storage_serv
 import 'package:events4me/app/shared/services/user/user_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -16,7 +17,7 @@ void main() {
   late DioService dioService;
   late DioAdapter dioAdapter;
   late LoginState state;
-  late MockSecureStorageService secureStorageService;
+  late SecureStorageService secureStorageService;
   late UserService userService;
 
   var token =
@@ -27,16 +28,17 @@ void main() {
   });
 
   setUp(() {
-    state = LoginState();
     dioService = DioService();
+    state = LoginState();
     dioAdapter = DioAdapter(dio: dioService, matcher: UrlRequestMatcher());
-    secureStorageService = MockSecureStorageService();
+    secureStorageService = Modular.get<SecureStorageService>();
     userService = Modular.get<UserService>();
     loginRepository = LoginRepositoryImpl(
       dioService: dioService,
       state: state,
+      googleSignIn: Modular.get<GoogleSignIn>(),
+      secureStorageService: Modular.get<SecureStorageService>(),
     );
-    Modular.replaceInstance<SecureStorageService>(secureStorageService);
   });
 
   group('login API tests', () {
@@ -51,15 +53,13 @@ void main() {
                 'phone': '123',
               }));
 
-      when(
-        () => secureStorageService.storageWrite(key: 'token', value: token),
-      ).thenAnswer(
+      when(() => secureStorageService.storageRead(key: 'userIsLogged')).thenAnswer((_) async => '');
+
+      when(() => secureStorageService.storageWrite(key: 'token', value: token)).thenAnswer(
         (_) async => Future<void>.value,
       );
 
-      when(
-        () => secureStorageService.storageRead(key: 'token'),
-      ).thenAnswer(
+      when(() => secureStorageService.storageRead(key: 'token')).thenAnswer(
         (_) async => token,
       );
 
@@ -69,10 +69,10 @@ void main() {
       );
       expect(result, state.copyWith(status: LoginStatus.success));
       expect(userService.token, token);
-      expect(userService.user.id, 123);
-      expect(userService.user.name, 'caio');
-      expect(userService.user.email, 'caio@caio');
-      expect(userService.user.phone, '123');
+      expect(userService.user?.id, 123);
+      expect(userService.user?.name, 'caio');
+      expect(userService.user?.email, 'caio@caio');
+      expect(userService.user?.phone, '123');
     });
 
     test('should return a API error', () async {
@@ -82,10 +82,8 @@ void main() {
         (server) => server.reply(400, 'login incorreto'),
       );
 
-      final result =
-          await loginRepository.login(email: 'caio@caio', password: '123');
-      expect(result,
-          state.copyWith(status: LoginStatus.error, error: 'login incorreto'));
+      final result = await loginRepository.login(email: 'caio@caio', password: '123');
+      expect(result, state.copyWith(status: LoginStatus.error, error: 'login incorreto'));
     });
   });
 }

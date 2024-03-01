@@ -1,5 +1,10 @@
 # Histórico de mudanças do projeto
 
+
+# [1.0.8+8] 29/02/2024
+- Subindo ajustes e criações de codigo em alguns modulos da aplicação
+
+
 # [1.0.7+7] 21/12/2023
 - Criação dos arquivos de internacionalização do app
 - Ajustes no nome das rotas padrões do modulo para '/'
