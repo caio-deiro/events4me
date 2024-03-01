@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:events4me/app/shared/l10n/locale_keys.g.dart';
 import 'package:events4me/app/shared/services/dio/dio_service.dart';
 import 'package:events4me/app/shared/services/dio/error/api_error.dart';
 import 'package:events4me/app/shared/services/secure_storage/secure_storage_service.dart';
@@ -19,13 +21,24 @@ class LoginRepositoryImpl implements LoginRepository {
   /// LoginState instance
   final LoginState state;
 
+  /// Secure storage instance
+  final SecureStorageService secureStorageService;
+
+  /// GoogleSignIn instance
+  final GoogleSignIn googleSignIn;
+
+  /// Class Constructor
   LoginRepositoryImpl({
     required this.dioService,
     required this.state,
+    required this.secureStorageService,
+    required this.googleSignIn,
   });
 
+  /// User service instance
   var userService = Modular.get<UserService>();
 
+  /// App tools instance
   var appTools = Modular.get<Tools>();
 
   /// Login with API
@@ -34,21 +47,19 @@ class LoginRepositoryImpl implements LoginRepository {
     final data = FormData.fromMap({'email': email, 'password': password});
     try {
       final response = await dioService.post('', data: data);
-      final secureStorageService = Modular.get<SecureStorageService>();
+      if (await secureStorageService.storageRead(key: 'userIsLogged') == 'false') {
+        await secureStorageService.storageWrite(key: 'userIsLogged', value: 'true');
+      }
       await secureStorageService.storageWrite(
         key: 'token',
         value: response.data['token'],
       );
-      userService.token = await secureStorageService.storageRead(
-        key: 'token',
-      );
+      userService.token = await secureStorageService.storageRead(key: 'token');
       final user = UserModel.fromMap(response.data);
       userService.user = user;
-      userService.userISlogged = true;
       return state.copyWith(status: LoginStatus.success);
     } on ApiError catch (e) {
-      return state.copyWith(
-          status: LoginStatus.error, error: e.apiErrorMessage);
+      return state.copyWith(status: LoginStatus.error, error: e.apiErrorMessage);
     }
   }
 
@@ -56,20 +67,22 @@ class LoginRepositoryImpl implements LoginRepository {
   @override
   Future<LoginState> loginWithGoogle() async {
     try {
-      final googleSignIn = Modular.get<GoogleSignIn>();
       final user = await googleSignIn.signIn();
       final googleAuth = await user?.authentication;
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-      final userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
-      userService.googleUser = userCredential;
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      await secureStorageService.storageWrite(key: 'token', value: '${credential.token}');
+
       return state.copyWith(status: LoginStatus.success);
     } on FirebaseAuthException catch (e) {
       final errorMessage = appTools.getErrorFromFirebaseAuth(e.code);
       return state.copyWith(status: LoginStatus.error, error: errorMessage);
+    } catch (e) {
+      return state.copyWith(status: LoginStatus.error, error: LocaleKeys.errorDefault.tr());
     }
   }
 }

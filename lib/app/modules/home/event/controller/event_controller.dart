@@ -15,15 +15,13 @@ class EventController extends Cubit<EventsStates> {
   /// General methods
   Future<void> getAllEvents() async {
     emit(state.copyWith(status: EventStatus.loading));
-    final result = await repository.getAllEvents(userId: userService.user.id);
+    final result = await repository.getAllEvents(userId: userService.user!.id);
     emit(result);
   }
 
   /// Home events methods
   void filterEventsByStatus({String? eventStatus}) {
-    var filterStatus = state.eventList
-        ?.where((events) => events.status == eventStatus)
-        .toList();
+    var filterStatus = state.eventList?.where((events) => events.status == eventStatus).toList();
     emit(state.copyWith(filterEventList: filterStatus));
   }
 

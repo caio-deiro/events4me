@@ -1,10 +1,16 @@
 import 'package:bloc/bloc.dart';
-import 'package:events4me/app/modules/auth/login/repositories/login_repository_impl.dart';
+import 'package:events4me/app/modules/auth/login/repositories/login_repository.dart';
 import 'package:events4me/app/modules/auth/login/states/login_state.dart';
+import 'package:flutter/material.dart';
 
 class LoginController extends Cubit<LoginState> {
-  final LoginRepositoryImpl repository;
+  /// Login repository
+  final LoginRepository repository;
 
+  /// Login formkey
+  final formKey = GlobalKey<FormState>();
+
+  /// Class contructor
   LoginController({
     required this.repository,
   }) : super(LoginState());

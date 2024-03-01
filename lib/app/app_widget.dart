@@ -1,3 +1,4 @@
+import 'package:asuka/asuka.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:events4me/app/shared/constants/theme/app_theme.dart';
 import 'package:events4me/app/shared/utils/tools.dart';
@@ -11,6 +12,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Tools().getSizeOfScreen(context);
     return MaterialApp.router(
+      builder: Asuka.builder,
       theme: AppTheme.themeData,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

@@ -1,22 +1,29 @@
+import 'package:events4me/app/shared/constants/app_colors.dart';
 import 'package:events4me/app/shared/utils/tools.dart';
 import 'package:flutter/material.dart';
 
 class AppDefaultPage extends StatelessWidget {
-  final Widget widget;
-  const AppDefaultPage({super.key, required this.widget});
+  final bool showLoading;
+  final Widget child;
+  const AppDefaultPage({super.key, required this.showLoading, required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Padding(
-      padding: EdgeInsets.symmetric(horizontal: Tools.size.width * .15),
-      child: SingleChildScrollView(
-        child: SizedBox(
-          height: Tools.size.height + 1,
-          width: Tools.size.width,
-          child: widget,
-        ),
-      ),
-    ));
+    return Stack(
+      children: [
+        child,
+        Visibility(
+          visible: showLoading,
+          child: Container(
+            width: Tools.size.width,
+            height: Tools.size.height,
+            color: AppColors.grey1.withOpacity(0.5),
+            child: Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          ),
+        )
+      ],
+    );
   }
 }

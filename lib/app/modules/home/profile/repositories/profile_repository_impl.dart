@@ -27,7 +27,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }) async {
     try {
       var data = <String, dynamic>{
-        'id': userService.user.id,
+        'id': userService.user?.id,
       };
 
       if (phone != null) {
@@ -47,8 +47,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       userService.user = user;
       return state.copyWith(status: ProfileStatus.success, user: user);
     } on ApiError catch (e) {
-      return state.copyWith(
-          status: ProfileStatus.error, error: e.apiErrorMessage);
+      return state.copyWith(status: ProfileStatus.error, error: e.apiErrorMessage);
     }
   }
 }

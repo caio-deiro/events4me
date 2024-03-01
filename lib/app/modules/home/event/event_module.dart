@@ -1,3 +1,4 @@
+import 'package:events4me/app/app_module.dart';
 import 'package:events4me/app/modules/home/event/UI/create_event_page.dart';
 import 'package:events4me/app/modules/home/event/UI/events_calendar_page.dart';
 import 'package:events4me/app/modules/home/event/UI/home_events_page.dart';
@@ -11,6 +12,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class EventModule extends Module {
   @override
+  List<Module> get imports => [AppModule()];
+
+  @override
   void binds(i) {
     i.addLazySingleton(EventsStates.new);
     i.addLazySingleton(EventRepositoryImpl.new);
@@ -23,10 +27,8 @@ class EventModule extends Module {
   @override
   void routes(r) => [
         r.child('/', child: (context) => HomeEventsPage()),
-        r.child(AppRoutes.createEventPage,
-            child: (context) => CreateEventPage()),
-        r.child(AppRoutes.eventsCalendarPage,
-            child: (context) => EventsCalendarPage()),
+        r.child(AppRoutes.createEventPage, child: (context) => CreateEventPage()),
+        r.child(AppRoutes.eventsCalendarPage, child: (context) => EventsCalendarPage()),
         r.module(AppModules.profileModule, module: ProfileModule())
       ];
 }

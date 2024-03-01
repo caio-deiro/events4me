@@ -1,8 +1,10 @@
 import 'package:events4me/app/modules/home/profile/repositories/profile_repository_impl.dart';
 import 'package:events4me/app/modules/home/profile/states/profile_states.dart';
 import 'package:events4me/app/shared/services/dio/dio_service.dart';
+import 'package:events4me/app/shared/services/secure_storage/secure_storage_service.dart';
 import 'package:events4me/app/shared/services/user/user_model.dart';
 import 'package:events4me/app/shared/services/user/user_service.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
@@ -16,15 +18,17 @@ void main() {
   late ProfileStates state;
   late UserService userService;
   late GoogleSignIn googleSignIn;
+  late SecureStorageService storageService;
 
   setUpAll(() {
-    setupAppModuleToTests();
+    Modular.init(BindForTests());
   });
 
   setUp(() {
-    googleSignIn = GoogleSignIn();
     dio = DioService();
-    userService = UserService(dio: dio, googleSignIn: googleSignIn);
+    googleSignIn = Modular.get<GoogleSignIn>();
+    storageService = Modular.get<SecureStorageService>();
+    userService = UserService(googleSignIn: googleSignIn, dioService: dio, secureStorage: storageService);
     dioAdapter = DioAdapter(dio: dio, matcher: UrlRequestMatcher());
     state = ProfileStates();
     repository = ProfileRepositoryImpl(
@@ -58,7 +62,7 @@ void main() {
 
       final result = await repository.updateProfile(phone: '123');
 
-      expect(userService.user.phone, equals('123'));
+      expect(userService.user?.phone, equals('123'));
       expect(
           result,
           state.copyWith(
@@ -79,7 +83,7 @@ void main() {
 
       final result = await repository.updateProfile(phone: '123');
 
-      expect(userService.user.phone, equals('123456'));
+      expect(userService.user?.phone, equals('123456'));
       expect(
           result,
           state.copyWith(
